@@ -58,7 +58,7 @@ func createStatus(cfg config) error {
 	}{
 		State:       getState(cfg.State, cfg.StatusStateChecker),
 		TargetURL:   cfg.BuildURL,
-		Description: strings.Title(getState(cfg.State)),
+		Description: strings.Title(getState(cfg.State, cfg.StatusStateChecker)),
 		Context:     cfg.StatusIdentifier,
 	}
 	body, err := json.Marshal(statusReq)
