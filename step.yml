@@ -6,7 +6,7 @@ description: |-
 website: https://github.com/bitrise-steplib/steps-github-status
 source_code_url: https://github.com/bitrise-steplib/steps-github-status
 support_url: https://github.com/bitrise-steplib/steps-github-status/issues
-type_tags: 
+type_tags:
 - utility
 is_requires_admin_user: false
 is_always_run: true
@@ -52,6 +52,13 @@ inputs:
       summary: ""
       description: |-
         API URL for GitHub or Github Enterprise
+  - status_state: "$BITRISE_BUILD_STATUS"
+    opts:
+      title: "Status State"
+      summary: ""
+      description: |-
+        The filed which determines what status we are working with and what is the state of that status.
+      is_required: true
   - status_identifier: "continuous-integration/bitrise"
     opts:
       title: "Status Identifier"

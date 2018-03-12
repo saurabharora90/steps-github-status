@@ -21,6 +21,7 @@ type config struct {
 	State            string `env:"set_specific_status,opt[auto,pending,success,error,failure]"`
 	BuildURL         string `env:"build_url"`
 	StatusIdentifier string `env:"status_identifier"`
+	StatusStateChecker string `env:"status_checker"`
 }
 
 // OwnerAndRepo returns the owner and the repository part of a git repository url. Possible url formats:
@@ -32,11 +33,11 @@ func OwnerAndRepo(url string) (string, string) {
 	return a[1], strings.TrimSuffix(a[2], ".git")
 }
 
-func getState(preset string) string {
+func getState(preset string, checker string) string {
 	if preset != "auto" {
 		return preset
 	}
-	if os.Getenv("BITRISE_BUILD_STATUS") == "0" {
+	if os.Getenv(checker) == "0" {
 		return "success"
 	}
 	return "failure"
@@ -55,7 +56,7 @@ func createStatus(cfg config) error {
 		Description string `json:"description,omitempty"`
 		Context     string `json:"context,omitempty"`
 	}{
-		State:       getState(cfg.State),
+		State:       getState(cfg.State, cfg.StatusStateChecker),
 		TargetURL:   cfg.BuildURL,
 		Description: strings.Title(getState(cfg.State)),
 		Context:     cfg.StatusIdentifier,
