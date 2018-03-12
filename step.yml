@@ -52,9 +52,9 @@ inputs:
       summary: ""
       description: |-
         API URL for GitHub or Github Enterprise
-  - status_check: "$BITRISE_BUILD_STATUS"
+  - status_state: "$BITRISE_BUILD_STATUS"
     opts:
-      title: "Status Checker"
+      title: "Status State"
       summary: ""
       description: |-
         The filed which determines what status we are working with and what is the state of that status.
