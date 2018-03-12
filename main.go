@@ -37,7 +37,7 @@ func getState(preset string, checker string) string {
 	if preset != "auto" {
 		return preset
 	}
-	if os.Getenv(checker) == "0" {
+	if os.Getenv(checker) == 0 {
 		return "success"
 	}
 	return "failure"
